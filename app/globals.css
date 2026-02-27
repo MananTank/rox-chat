@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "tippy.js/dist/tippy.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -45,8 +46,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --animate-shiny-text: shiny-text 8s infinite;
 }
 
+/* haven't set light mode colors yet */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -83,17 +86,17 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #111111;
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --card: oklch(0.25 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.77 0.16 70);
-  --primary-foreground: oklch(0.28 0.07 46);
+  --primary: oklch(0.35 0.05 73.29);
+  --primary-foreground: oklch(0.8 0.1 73.28);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: oklch(0.33 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.371 0 0);
   --accent-foreground: oklch(0.985 0 0);
@@ -123,4 +126,95 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--muted);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--muted-foreground);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
+}
+
+:root {
+  --squircle-radius: 1;
+}
+
+@supports (corner-shape: squircle) {
+  :root {
+    --squircle-radius: 2;
+  }
+}
+
+.squircle-2xl {
+  corner-shape: squircle;
+  border-radius: calc(20px * var(--squircle-radius));
+}
+
+/* .squircle-b-lg {
+  border-bottom-left-radius: calc(8px * var(--squircle-radius));
+  border-bottom-right-radius: calc(8px * var(--squircle-radius));
+} */
+
+/* Tiptap Editor Styles */
+.tiptap {
+  outline: none;
+}
+
+.tiptap p {
+  margin: 0;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--muted-foreground);
+  opacity: 0.5;
+  pointer-events: none;
+  height: 0;
+}
+
+.tiptap .mention {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 4px;
+  padding: 0 4px;
+  font-weight: 500;
+}
+
+/* Tippy.js styles for mention dropdown */
+.tippy-box {
+  background-color: transparent;
+}
+
+.tippy-content {
+  padding: 0;
+}
+
+.tippy-arrow {
+  display: none;
 }
