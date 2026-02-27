@@ -66,7 +66,7 @@ interface ChatInputProps {
 
 function EditorSSR() {
   return (
-    <div className="w-full resize-none p-4 text-sm text-foreground overscroll-none max-h-[50vh] overflow-y-auto focus:outline-none min-h-[45px]">
+    <div className="w-full resize-none p-4 text-sm text-foreground overscroll-none max-h-[50vh] overflow-y-auto focus:outline-none min-h-[70px]">
       <p className="text-muted-foreground/50">Type @ to change account</p>
     </div>
   );
@@ -127,7 +127,7 @@ export function ChatInput({
           "w-full resize-none p-4 text-sm",
           "text-foreground overscroll-none max-h-[50vh] overflow-y-auto",
           "focus:outline-none",
-          "min-h-[45px]",
+          "min-h-[70px]",
         ),
       },
     },
