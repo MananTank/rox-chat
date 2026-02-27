@@ -216,7 +216,7 @@ export function ChatInput({
               onClick={onStop}
               variant="ghost"
               className={cn(
-                "rounded-full w-auto h-auto p-2 cursor-pointer transition-all duration-200 bg-muted hover:bg-muted/80",
+                "rounded-lg w-auto h-auto p-2 cursor-pointer transition-all duration-200 bg-muted hover:bg-muted/80",
               )}
             >
               <SquareIcon className="size-4 fill-muted-foreground text-muted-foreground scale-75" />
@@ -227,7 +227,7 @@ export function ChatInput({
               variant="primary"
               disabled={!canSend}
               className={cn(
-                "rounded-full w-auto h-auto p-2 cursor-pointer hover:bg-primary/80 transition-all duration-200",
+                "rounded-lg w-auto h-auto p-2 cursor-pointer hover:bg-primary/80 transition-all duration-200",
               )}
             >
               <ArrowUp className="size-4" />
