@@ -297,7 +297,7 @@ function StepsList({
                   className={cn(
                     "size-6 rounded-full flex items-center justify-center",
                     isStepComplete && "bg-muted-foreground/30",
-                    isActive && "bg-primary",
+                    isActive && "bg-primary/60",
                     wasStopped && isLast && "bg-destructive/10",
                   )}
                   layout
@@ -325,7 +325,7 @@ function StepsList({
                         <motion.span
                           key="number"
                           className={cn(
-                            "text-xs",
+                            "text-xs font-medium",
                             isActive
                               ? "text-primary-foreground"
                               : "text-muted-foreground",
