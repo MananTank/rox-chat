@@ -198,13 +198,18 @@
   height: 0;
 }
 
-.tiptap .mention {
+.mention {
   background-color: color-mix(in srgb, var(--primary) 60%, transparent);
   color: var(--primary-foreground);
   border-radius: 4px;
   padding-inline: 4px;
   padding-block: 2px;
   font-weight: 500;
+}
+
+.chat-message-content p {
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 /* Tippy.js styles for mention dropdown */
