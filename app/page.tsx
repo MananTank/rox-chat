@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useRef, useState, Fragment } from "react";
 import { ChatInput } from "@/components/chat-input";
 import { ChatMessage } from "@/components/chat-message";
 import { ChatResponse } from "@/components/chat-response";
@@ -22,12 +22,10 @@ const initialThinkingState: ThinkingState = {
 };
 
 export default function Page() {
-  const [conversations, setConversations] = React.useState<ConversationItem[]>(
-    [],
-  );
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [conversations, setConversations] = useState<ConversationItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { startThinking, stopThinking } = useThinking();
-  const mainRef = React.useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
 
   const handleSend = async (message: string) => {
     const conversationId = Date.now().toString();
@@ -75,7 +73,7 @@ export default function Page() {
           ) : (
             <>
               {conversations.map((conversation) => (
-                <React.Fragment key={conversation.id}>
+                <Fragment key={conversation.id}>
                   <ChatMessage content={conversation.userMessage} />
                   <ChatResponse
                     status={conversation.thinkingState.status}
@@ -89,7 +87,7 @@ export default function Page() {
                     }
                     response={conversation.thinkingState.response}
                   />
-                </React.Fragment>
+                </Fragment>
               ))}
 
               {/* this allows us to scroll the user's sent messages to top*/}

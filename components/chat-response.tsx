@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import {
   BriefcaseIcon,
   CheckIcon,
@@ -49,10 +49,8 @@ export function ChatResponse({
   response,
   className,
 }: ChatResponseProps) {
-  const [showThinking, setShowThinking] = React.useState(false);
+  const [showThinking, setShowThinking] = useState(false);
 
-  const progress =
-    totalSteps > 0 ? ((currentStepIndex + 1) / totalSteps) * 100 : 0;
   const isComplete = status === "completed" || status === "stopped";
 
   return (

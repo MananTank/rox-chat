@@ -1,7 +1,12 @@
 "use client";
 
-import * as React from "react";
-import { ArrowUp, SquareIcon, BookmarkIcon } from "lucide-react";
+import { useCallback, useMemo, useEffect, useState } from "react";
+import {
+  ArrowUp,
+  SquareIcon,
+  BookmarkIcon,
+  CircleSlashIcon,
+} from "lucide-react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Mention from "@tiptap/extension-mention";
@@ -72,18 +77,19 @@ export function ChatInput({
   onSend,
   onStop,
 }: ChatInputProps) {
-  const [selectedAccount, setSelectedAccount] = React.useState(accounts[0]);
-  const [isBookmarked, setIsBookmarked] = React.useState(false);
-  const [isSuggestionOpen, setIsSuggestionOpen] = React.useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(accounts[0]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isSuggestionOpen, setIsSuggestionOpen] = useState(false);
+  const [hasContent, setHasContent] = useState(false);
 
-  const handleAccountSelect = React.useCallback((item: MentionItem) => {
+  const handleAccountSelect = useCallback((item: MentionItem) => {
     const account = accounts.find((a) => a.id === item.id);
     if (account) {
       setSelectedAccount(account);
     }
   }, []);
 
-  const suggestion = React.useMemo(
+  const suggestion = useMemo(
     () =>
       createSuggestion({
         items: mentionItems,
@@ -125,25 +131,29 @@ export function ChatInput({
         ),
       },
     },
+    onUpdate: ({ editor }) => {
+      setHasContent(editor.getText().trim().length > 0);
+    },
     immediatelyRender: false,
   });
 
-  const getText = React.useCallback(() => {
+  const getText = useCallback(() => {
     if (!editor) return "";
     return editor.getText().trim();
   }, [editor]);
 
-  const canSend = getText().length > 0 && !isLoading;
+  const canSend = hasContent && !isLoading;
 
-  const handleSend = React.useCallback(() => {
+  const handleSend = useCallback(() => {
     const text = getText();
     if (text && !isLoading) {
       onSend?.(text);
       editor?.commands.clearContent();
+      setHasContent(false);
     }
   }, [editor, getText, isLoading, onSend]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!editor) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -206,10 +216,10 @@ export function ChatInput({
               onClick={onStop}
               variant="ghost"
               className={cn(
-                "rounded-lg w-auto h-auto p-2 cursor-pointer transition-all duration-200 bg-muted hover:bg-muted/80",
+                "rounded-full w-auto h-auto p-2 cursor-pointer transition-all duration-200 bg-muted hover:bg-muted/80",
               )}
             >
-              <SquareIcon className="size-4 fill-current" />
+              <SquareIcon className="size-4 fill-muted-foreground text-muted-foreground scale-75" />
             </Button>
           ) : (
             <Button
@@ -217,7 +227,7 @@ export function ChatInput({
               variant="primary"
               disabled={!canSend}
               className={cn(
-                "rounded-lg w-auto h-auto p-2 cursor-pointer hover:bg-primary/80 transition-all duration-200",
+                "rounded-full w-auto h-auto p-2 cursor-pointer hover:bg-primary/80 transition-all duration-200",
               )}
             >
               <ArrowUp className="size-4" />

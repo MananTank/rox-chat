@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState, forwardRef, useEffect, useImperativeHandle } from "react";
 import { ReactRenderer } from "@tiptap/react";
 import type { SuggestionOptions, SuggestionProps } from "@tiptap/suggestion";
 import type { MentionNodeAttrs } from "@tiptap/extension-mention";
@@ -18,11 +18,11 @@ interface MentionListProps {
   command: (item: MentionItem) => void;
 }
 
-export const MentionList = React.forwardRef<
+export const MentionList = forwardRef<
   { onKeyDown: (props: { event: KeyboardEvent }) => boolean },
   MentionListProps
 >(({ items, command }, ref) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const selectItem = (index: number) => {
     const item = items[index];
@@ -43,11 +43,12 @@ export const MentionList = React.forwardRef<
     selectItem(selectedIndex);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedIndex(0);
   }, [items]);
 
-  React.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     onKeyDown: ({ event }: { event: KeyboardEvent }) => {
       if (event.key === "ArrowUp") {
         upHandler();
