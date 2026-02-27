@@ -93,7 +93,9 @@ export function SelectMenu<T extends SelectMenuItem>({
             )}
           >
             {value.icon && <ItemIcon src={value.icon} size={16} />}
-            <span className="text-sm text-muted-foreground">{value.name}</span>
+            <span className="text-sm text-muted-foreground font-normal">
+              {value.name}
+            </span>
             <ChevronsUpDownIcon className="size-3.5 opacity-50" />
           </Button>
         }

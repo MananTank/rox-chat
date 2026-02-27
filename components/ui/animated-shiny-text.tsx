@@ -31,7 +31,7 @@ export function AnimatedShinyText(props: {
           animation: "text-shimmer 1.25s linear infinite",
           ...variantStyle,
           backgroundImage:
-            "linear-gradient(70deg, var(--shine-muted-foreground) 50%, var(--shine-foreground) 70%, var(--shine-muted-foreground) 100%)",
+            "linear-gradient(70deg, var(--shine-muted-foreground) 30%, var(--shine-foreground) 70%, var(--shine-muted-foreground) 100%)",
         } as React.CSSProperties
       }
     >

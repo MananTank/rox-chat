@@ -95,7 +95,7 @@ export function ChatResponse({
                         </AnimatedShinyText>
                         <motion.span
                           key={currentStepIndex}
-                          className="text-sm text-muted-foreground"
+                          className="text-base font-medium text-muted-foreground"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.2 }}
@@ -291,7 +291,7 @@ function StepsList({
                 transition={{ duration: 0.25, ease: easeOutQuint }}
               >
                 {isActive && (
-                  <div className="absolute size-10 rounded-full border border-dashed border-primary-foreground/30 animate-spin [animation-duration:4s]" />
+                  <div className="absolute size-10 rounded-full border border-dashed border-primary-foreground/50 animate-spin [animation-duration:4s]" />
                 )}
                 <motion.div
                   className={cn(
