@@ -296,7 +296,7 @@ function StepsList({
                 <motion.div
                   className={cn(
                     "size-6 rounded-full flex items-center justify-center",
-                    isStepComplete && "bg-muted-foreground/30",
+                    isStepComplete && "bg-muted-foreground/20",
                     isActive && "bg-primary/60",
                     wasStopped && isLast && "bg-destructive/10",
                   )}
